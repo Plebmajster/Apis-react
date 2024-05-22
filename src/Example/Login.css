@@ -117,8 +117,6 @@ label {
   width: 20px;
   height: 20px;
 }
-
-
 .toggle-password {
   position: absolute;
   right: 10px;
@@ -127,4 +125,17 @@ label {
   width: 20px;
   height: 20px;
   cursor: pointer;
+}
+.setting{
+  display: flex;
+  position: absolute;
+  right: 15px;
+  bottom: 20px;
+}
+.cog{
+  width: 40px;
+  height: auto;
+  background-color: rgb(103, 215, 215);
+  border-radius: 15px;
+  padding: 7px;
 }

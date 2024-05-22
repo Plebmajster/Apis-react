@@ -74,6 +74,10 @@ function Login({ onLogin }) {
             </div>
           </form>
         </div>
+        <div className='setting'>
+          <img className='cog' src='/obr/cog.png'>
+          </img>
+        </div>
       </header>
     </div>
   );
