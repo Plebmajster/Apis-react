@@ -21,7 +21,7 @@ body {
 
 .hore {
   display: flex;
-  height: 20vh;
+  height: 15vh;
   max-height: 20vh;
   width: 100vw;
   max-width: 100vw;
@@ -59,7 +59,7 @@ body {
   padding-left: 30px;
 }
 
-button {
+.submit-button {
   max-width: 50px;
   padding: 10px 55px;
   display: flex;
@@ -138,4 +138,36 @@ label {
   background-color: rgb(103, 215, 215);
   border-radius: 15px;
   padding: 7px;
+}
+.settings-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.settings-content {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 80%;
+  max-width: 250px;
+  text-align: center;
+}
+
+.settings-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.settings-buttons button {
+  padding: 10px;
+  cursor: pointer;
+  margin-bottom: 10px;
 }

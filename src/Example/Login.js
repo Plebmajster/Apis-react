@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import './Login.css';
+import QRREACT from 'react-qr-scanner';
 
 function Login({ onLogin }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [serverUrl, setServerUrl] = useState('');
+  const [isScanning, setIsScanning] = useState(false);
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -24,6 +28,17 @@ function Login({ onLogin }) {
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
+  };
+
+  const handleError = (error) => {
+    console.error(error);
+  };
+
+  const handleScan = (data) => {
+    if (data) {
+      console.log('Scanned data:', data);
+      setIsScanning(false); // Stop scanning after successful scan
+    }
   };
 
   const isFormValid = username && password;
@@ -74,10 +89,36 @@ function Login({ onLogin }) {
             </div>
           </form>
         </div>
-        <div className='setting'>
-          <img className='cog' src='/obr/cog.png'>
-          </img>
+        <div className='setting' onClick={() => setIsSettingsOpen(true)}>
+          <img className='cog' src="obr/cog.png" alt="Settings" />
         </div>
+
+        {isSettingsOpen && (
+          <div className="settings-modal">
+            <div className="settings-content">
+              <h2>Settings</h2>
+              <input
+                type="text"
+                placeholder='Enter server URL'
+                value={serverUrl}
+                onChange={(event) => setServerUrl(event.target.value)}
+              />
+              <div className="settings-buttons">
+                <button onClick={() => { /* Save the URL logic here */ }}>Save</button>
+                <button onClick={() => setIsSettingsOpen(false)}>Close</button>
+                <button onClick={() => setIsScanning(!isScanning)}>Scan QR Code</button>
+              </div>
+              {isScanning && (
+                <QRREACT
+                  delay={300}
+                  onError={handleError}
+                  onScan={handleScan}
+                  style={{ width: '100%' }}
+                />
+              )}
+            </div>
+          </div>
+        )}
       </header>
     </div>
   );
