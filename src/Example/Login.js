@@ -4,6 +4,7 @@ import './Login.css';
 function Login({ onLogin }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -21,6 +22,10 @@ function Login({ onLogin }) {
     }
   };
 
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   const isFormValid = username && password;
 
   return (
@@ -30,20 +35,32 @@ function Login({ onLogin }) {
         <div className="content">
           <form onSubmit={handleSubmit}>
             <div className='forma'>
-              <input
-                className='input input_meno'
-                type="text"
-                value={username}
-                onChange={handleUsernameChange}
-                placeholder='Používateľské meno'
-              />
-              <input
-                className='input input_heslo'
-                type="password"
-                value={password}
-                onChange={handlePasswordChange}
-                placeholder='Heslo'
-              />
+              <div className="input-container">
+                <img src='obr/user.png' alt='User Icon' className='input-icon' />
+                <input
+                  className='input'
+                  type="text"
+                  value={username}
+                  onChange={handleUsernameChange}
+                  placeholder='Používateľské meno'
+                />
+              </div>
+              <div className="input-container">
+                <img src='obr/padlock.png' alt='Password Icon' className='input-icon' />
+                <input
+                  className='input'
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={handlePasswordChange}
+                  placeholder='Heslo'
+                />
+                <img
+                  src={showPassword ? 'obr/eye.png' : 'obr/hidden.png'}
+                  alt="Toggle Password Visibility"
+                  className="toggle-password"
+                  onClick={toggleShowPassword}
+                />
+              </div>
               <label className='automaticky'>
                 Prihlasit Automaticky
                 <input type='checkbox'></input>
