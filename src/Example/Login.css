@@ -170,4 +170,12 @@ label {
   padding: 10px;
   cursor: pointer;
   margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 0px;
+  background-color: rgb(103, 215, 215);
+}
+.cogserver{
+  padding: 10px;
+  border-radius: 5px;
 }

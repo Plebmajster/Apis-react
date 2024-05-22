@@ -103,6 +103,7 @@ function Login({ onLogin }) {
             <div className="settings-content">
               <h2>Settings</h2>
               <input
+                className='cogserver'
                 type="text"
                 placeholder='Enter server URL'
                 value={serverUrl}
