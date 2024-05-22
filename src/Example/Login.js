@@ -43,6 +43,11 @@ function Login({ onLogin }) {
 
   const isFormValid = username && password;
 
+  const handleSettingsClick = () => {
+    // Open settings modal
+    setIsSettingsOpen(true);
+  };
+
   return (
     <div className="App">
       <header className="App_header">
@@ -89,7 +94,7 @@ function Login({ onLogin }) {
             </div>
           </form>
         </div>
-        <div className='setting' onClick={() => setIsSettingsOpen(true)}>
+        <div className='setting' onClick={handleSettingsClick}>
           <img className='cog' src="obr/cog.png" alt="Settings" />
         </div>
 
@@ -106,7 +111,11 @@ function Login({ onLogin }) {
               <div className="settings-buttons">
                 <button onClick={() => { /* Save the URL logic here */ }}>Save</button>
                 <button onClick={() => setIsSettingsOpen(false)}>Close</button>
-                <button onClick={() => setIsScanning(!isScanning)}>Scan QR Code</button>
+                {navigator.mediaDevices && navigator.mediaDevices.getUserMedia ? (
+                  <button onClick={() => setIsScanning(!isScanning)}>Scan QR Code</button>
+                ) : (
+                  <p>QR Code scanning is not supported in this environment.</p>
+                )}
               </div>
               {isScanning && (
                 <QRREACT
