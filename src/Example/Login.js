@@ -48,7 +48,7 @@ function Login({ onLogin }) {
               <div className="input-container">
                 <img src='obr/padlock.png' alt='Password Icon' className='input-icon' />
                 <input
-                  className='input'
+                  className='input input_heslo'
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={handlePasswordChange}

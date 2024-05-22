@@ -46,6 +46,8 @@ body {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  max-width: 80vw;
+  width: 100%;
   gap: 15px;
 }
 
@@ -94,15 +96,17 @@ label {
 
 .input-container {
   position: relative;
-  max-width: 60vw;
-  width: 250px;
+  width: 100%;
 }
 
 .input {
-  max-width: 100%;
-  padding: 18px 40px 18px 40px; /* Add padding to the left to make space for the icon */
   border-radius: 5px;
   border: 1px solid #ccc;
+  padding-left: 40px;
+  padding-right: 40px;
+  height: 40px;
+  max-width: 100%;
+  min-width: 15vw;
 }
 
 .input-icon {
@@ -114,9 +118,6 @@ label {
   height: 20px;
 }
 
-.input_heslo {
-  padding: 10px 40px 10px 40px;
-}
 
 .toggle-password {
   position: absolute;
