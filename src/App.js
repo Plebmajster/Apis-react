@@ -3,7 +3,7 @@ import './Example/Login.css';
 import Login from './Example/Login';
 
 function Home() {
-  return <div>Welcome to the Home Page!</div>;
+  return <div>Vitaj na stránke!</div>;
 }
 
 function App() {

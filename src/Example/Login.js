@@ -1,14 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Login.css';
 import QRREACT from 'react-qr-scanner';
 
 function Login({ onLogin }) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState(localStorage.getItem('username') || '');
+  const [password, setPassword] = useState(localStorage.getItem('password') || '');
   const [showPassword, setShowPassword] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const [serverUrl, setServerUrl] = useState('');
+  const [serverUrl, setServerUrl] = useState(localStorage.getItem('serverUrl') || '');
   const [isScanning, setIsScanning] = useState(false);
+  const [autoLogin, setAutoLogin] = useState(localStorage.getItem('autoLogin') === 'true');
+
+  useEffect(() => {
+    if (autoLogin) {
+      setUsername(localStorage.getItem('username') || '');
+      setPassword(localStorage.getItem('password') || '');
+    }
+  }, [autoLogin]);
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -41,12 +49,29 @@ function Login({ onLogin }) {
     }
   };
 
-  const isFormValid = username && password;
-
   const handleSettingsClick = () => {
-    // Open settings modal
     setIsSettingsOpen(true);
   };
+
+  const handleSaveUrl = () => {
+    localStorage.setItem('serverUrl', serverUrl);
+    setIsSettingsOpen(false);
+  };
+
+  const handleAutoLoginChange = (event) => {
+    const isChecked = event.target.checked;
+    setAutoLogin(isChecked);
+    localStorage.setItem('autoLogin', isChecked);
+    if (isChecked) {
+      localStorage.setItem('username', username);
+      localStorage.setItem('password', password);
+    } else {
+      localStorage.removeItem('username');
+      localStorage.removeItem('password');
+    }
+  };
+
+  const isFormValid = username && password;
 
   return (
     <div className="App">
@@ -55,8 +80,8 @@ function Login({ onLogin }) {
         <div className="content">
           <form onSubmit={handleSubmit}>
             <div className='forma'>
-              <div className="input-container">
-                <img src='obr/user.png' alt='User Icon' className='input-icon' />
+              <div className="input_container">
+                <img src='obr/user.png' alt='User Icon' className='input_icon' />
                 <input
                   className='input'
                   type="text"
@@ -65,8 +90,8 @@ function Login({ onLogin }) {
                   placeholder='Používateľské meno'
                 />
               </div>
-              <div className="input-container">
-                <img src='obr/padlock.png' alt='Password Icon' className='input-icon' />
+              <div className="input_container">
+                <img src='obr/padlock.png' alt='Password Icon' className='input_icon' />
                 <input
                   className='input input_heslo'
                   type={showPassword ? "text" : "password"}
@@ -77,18 +102,22 @@ function Login({ onLogin }) {
                 <img
                   src={showPassword ? 'obr/eye.png' : 'obr/hidden.png'}
                   alt="Toggle Password Visibility"
-                  className="toggle-password"
+                  className="toggle_password"
                   onClick={toggleShowPassword}
                 />
               </div>
               <label className='automaticky'>
-                Prihlasit Automaticky
-                <input type='checkbox'></input>
+                Prihlásiť Automaticky
+                <input
+                  type='checkbox'
+                  checked={autoLogin}
+                  onChange={handleAutoLoginChange}
+                />
               </label>
               <button
                 type="submit"
                 disabled={!isFormValid}
-                className={`submit-button ${!isFormValid ? 'disabled' : ''}`}>
+                className={`submit_button ${!isFormValid ? 'disabled' : ''}`}>
                 Prihlásiť
               </button>
             </div>
@@ -99,23 +128,23 @@ function Login({ onLogin }) {
         </div>
 
         {isSettingsOpen && (
-          <div className="settings-modal">
-            <div className="settings-content">
-              <h2>Settings</h2>
+          <div className="settings_modal">
+            <div className="settings_content">
+              <h2>Nastavenia</h2>
               <input
-                className='cogserver'
+                className='cog_server'
                 type="text"
-                placeholder='Enter server URL'
+                placeholder='Zadaj URL'
                 value={serverUrl}
                 onChange={(event) => setServerUrl(event.target.value)}
               />
-              <div className="settings-buttons">
-                <button onClick={() => { /* Save the URL logic here */ }}>Save</button>
-                <button onClick={() => setIsSettingsOpen(false)}>Close</button>
+              <div className="settings_buttons">
+                <button onClick={handleSaveUrl}>Uložiť</button>
+                <button onClick={() => setIsSettingsOpen(false)}>Zavrieť</button>
                 {navigator.mediaDevices && navigator.mediaDevices.getUserMedia ? (
-                  <button onClick={() => setIsScanning(!isScanning)}>Scan QR Code</button>
+                  <button onClick={() => setIsScanning(!isScanning)}>QR kód</button>
                 ) : (
-                  <p>QR Code scanning is not supported in this environment.</p>
+                  <p>Skenovanie QR kódu nie je povolené!</p>
                 )}
               </div>
               {isScanning && (
@@ -123,7 +152,8 @@ function Login({ onLogin }) {
                   delay={300}
                   onError={handleError}
                   onScan={handleScan}
-                  style={{ width: '100%' }}
+                  style={{ width: '100%', borderRadius: '15px' }}
+                  constraints={{ video: { facingMode: 'environment' } }}
                 />
               )}
             </div>
