@@ -32,7 +32,6 @@ function Login() {
     try {
       const response = await fetch(`${API_CONNECT}/system/api/v1/auth`, {
         method: 'POST',
-        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
@@ -46,7 +45,7 @@ function Login() {
         console.debug('Authentication failed:', response.statusText);
       } else {
         console.debug('Authentication successful');
-        Login();
+        window.location.href = 'https://example.com';
       }
     } catch (error) {
       console.error('Error during authentication:', error);
