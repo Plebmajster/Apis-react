@@ -42,13 +42,13 @@ function Login() {
       });
 
       if (!response.ok) {
-        console.debug('Authentication failed:', response.statusText);
+        console.log('Authentication failed:', response.statusText);
       } else {
-        console.debug('Authentication successful');
+        console.log('Authentication successful');
         window.location.href = 'https://example.com';
       }
     } catch (error) {
-      console.error('Error during authentication:', error);
+      console.log('Error during authentication:', error);
     }
   };
 
@@ -57,7 +57,7 @@ function Login() {
   };
 
   const handleError = (error) => {
-    console.error(error);
+    console.log(error);
   };
 
   const handleScan = (data) => {
