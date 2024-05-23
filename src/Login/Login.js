@@ -3,7 +3,7 @@ import './Login.css';
 import QRREACT from 'react-qr-scanner';
 import { API_CONNECT } from '../constants/constants';
 
-function Login({ onLogin }) {
+function Login() {
   const [username, setUsername] = useState(localStorage.getItem('username') || '');
   const [password, setPassword] = useState(localStorage.getItem('password') || '');
   const [showPassword, setShowPassword] = useState(false);
@@ -12,10 +12,6 @@ function Login({ onLogin }) {
   const [isScanning, setIsScanning] = useState(false);
   const [autoLogin, setAutoLogin] = useState(localStorage.getItem('autoLogin') === 'true');
 
-  const [formData, setFormData] = useState({
-    _username: '',
-    _password: '',
-  })
   useEffect(() => {
     if (autoLogin) {
       setUsername(localStorage.getItem('username') || '');
@@ -25,45 +21,37 @@ function Login({ onLogin }) {
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
-    setFormData({
-      ...formData,
-      _username: event.target.value
-    });
   };
-  
+
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
-    setFormData({
-      ...formData,
-      _password: event.target.value
-    });
   };
-  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch (`${API_CONNECT}/system/api/v1/auth`, {
+      const response = await fetch(`${API_CONNECT}/system/api/v1/auth`, {
         method: 'POST',
         mode: 'no-cors',
         headers: {
-          'Content-type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: new URLSearchParams(formData).toString()
+        body: new URLSearchParams({
+          _username: username,
+          _password: password,
+        }).toString(),
       });
-  
-      if(!response.ok){
-        console.debug('Authentication failed:', response.statusText)
+
+      if (!response.ok) {
+        console.debug('Authentication failed:', response.statusText);
+      } else {
+        console.debug('Authentication successful');
+        Login();
       }
-  
-      console.debug('Authentication successful')
-      onLogin()
     } catch (error) {
-        console.error('Error during authentication:', error)
-      }
-    
+      console.error('Error during authentication:', error);
+    }
   };
-  
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -76,7 +64,7 @@ function Login({ onLogin }) {
   const handleScan = (data) => {
     if (data) {
       console.log('Scanned data:', data);
-      setIsScanning(false); // Stop scanning after successful scan
+      setIsScanning(false); // Stop scanning after a successful scan
     }
   };
 
@@ -94,27 +82,15 @@ function Login({ onLogin }) {
     setAutoLogin(isChecked);
     localStorage.setItem('autoLogin', isChecked);
     if (isChecked) {
-      setFormData({
-        ...formData,
-        _username: username,
-        _password: password
-      });
       localStorage.setItem('username', username);
       localStorage.setItem('password', password);
     } else {
-      setFormData({
-        ...formData,
-        _username: '',
-        _password: ''
-      });
       localStorage.removeItem('username');
       localStorage.removeItem('password');
     }
   };
-  console.log("Username:", formData._username);
-console.log("Password:", formData._password);
 
-  const isFormValid =  formData._username && formData._password;
+  const isFormValid = username && password;
 
   return (
     <div className="App">
