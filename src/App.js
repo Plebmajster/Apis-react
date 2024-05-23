@@ -1,23 +1,11 @@
 import React, { useState } from 'react';
-import './Example/Login.css';
-import Login from './Example/Login';
-
-function Home() {
-  return <div>Vitaj na stránke!</div>;
-}
+import './Login/Login.css';
+import Login from './Login/Login';
+import { RouterProvider } from 'react-router-dom';
+import {router} from './routes/index'
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
-
-  return (
-    <div>
-      {isLoggedIn ? <Home /> : <Login onLogin={handleLogin} />}
-    </div>
-  );
+  return <RouterProvider router={router} />
 }
 
-export default App;
+export default App
