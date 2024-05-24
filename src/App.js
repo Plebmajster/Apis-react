@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './Login/Login.css';
-import Login from './Login/Login';
 import { RouterProvider } from 'react-router-dom';
 import {router} from './routes/index'
 

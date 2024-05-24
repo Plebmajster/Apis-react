@@ -3,7 +3,7 @@ import './Login.css';
 import QRREACT from 'react-qr-scanner';
 import { API_CONNECT } from '../constants/constants';
 
-function Login({ onLogin }) {
+function Login(){
   const [username, setUsername] = useState(localStorage.getItem('username') || '');
   const [password, setPassword] = useState(localStorage.getItem('password') || '');
   const [showPassword, setShowPassword] = useState(false);
@@ -45,7 +45,6 @@ function Login({ onLogin }) {
     try {
       const response = await fetch (`${API_CONNECT}/system/api/v1/auth`, {
         method: 'POST',
-        mode: 'no-cors',
         headers: {
           'Content-type': 'application/x-www-form-urlencoded'
         },
@@ -53,13 +52,13 @@ function Login({ onLogin }) {
       });
   
       if(!response.ok){
-        console.debug('Authentication failed:', response.statusText)
+        console.log('Authentication failed:', response.statusText)
       }
   
-      console.debug('Authentication successful')
-      onLogin()
+      console.log('Authentication successful')
+      window.location.href = '/Dashboard'
     } catch (error) {
-        console.error('Error during authentication:', error)
+        console.log('Error during authentication:', error)
       }
     
   };
@@ -70,7 +69,7 @@ function Login({ onLogin }) {
   };
 
   const handleError = (error) => {
-    console.error(error);
+    console.log(error);
   };
 
   const handleScan = (data) => {
