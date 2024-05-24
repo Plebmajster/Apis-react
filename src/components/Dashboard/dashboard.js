@@ -3,7 +3,7 @@ import './dashboard.css';
 
 function Dashboard(){
     return(
-        
+            
         <p>Hello Dashboard</p>
     )
     }

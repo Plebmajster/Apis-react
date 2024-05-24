@@ -1,7 +1,7 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
-import Login from '../Login/Login';
-import Dashboard from '../Dashboard/dashboard.js'; // Correct path
+import Login from '../components/Dashboard/Login/Login.js';
+import Dashboard from '../components/Dashboard/dashboard.js'; // Correct path
 
 export const router = createBrowserRouter([
   {

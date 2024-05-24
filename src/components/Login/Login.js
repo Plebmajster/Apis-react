@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Login.css';
 import QRREACT from 'react-qr-scanner';
-import { API_CONNECT } from '../constants/constants';
+import { API_CONNECT } from '../../../constants/constants';
 
 function Login() {
   const [username, setUsername] = useState(localStorage.getItem('username') || '');
@@ -14,14 +14,18 @@ function Login() {
   const [wrongLogin, setWrongLogin] = useState(false);
 
   const [formData, setFormData] = useState({
-    _username: '',
-    _password: '',
+    _username: localStorage.getItem('username') || '',
+    _password: localStorage.getItem('password') || '',
   });
 
   useEffect(() => {
     if (autoLogin) {
       setUsername(localStorage.getItem('username') || '');
       setPassword(localStorage.getItem('password') || '');
+      setFormData({
+        _username: localStorage.getItem('username') || '',
+        _password: localStorage.getItem('password') || '',
+      });
     }
   }, [autoLogin]);
 
@@ -58,13 +62,13 @@ function Login() {
       } else {
         setWrongLogin(false); // Reset wrongLogin on successful authentication
         console.log('Authentication successful');
-        window.location.href = '/Dashboard'; // Only redirect on success
+        window.location.href = serverUrl; // Only redirect on success
       }
     } catch (error) {
       setWrongLogin(true); // Set wrongLogin to true on error
       console.log('Error during authentication:', error);
     }
-  };
+  };  
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -75,11 +79,13 @@ function Login() {
   };
 
   const handleScan = (data) => {
-    if (data) {
-      console.log('Scanned data:', data);
-      setIsScanning(false); // Stop scanning after successful scan
-    }
-  };
+  if (data) {
+    console.log('Scanned data:', data);
+    setServerUrl(data.text); // Set the scanned data to serverUrl
+    setIsScanning(false); // Stop scanning after successful scan
+  }
+};
+
 
   const handleSettingsClick = () => {
     setIsSettingsOpen(true);
@@ -95,21 +101,19 @@ function Login() {
     setAutoLogin(isChecked);
     localStorage.setItem('autoLogin', isChecked);
     if (isChecked) {
+      localStorage.setItem('username', username);
+      localStorage.setItem('password', password);
       setFormData({
-        ...formData,
         _username: username,
         _password: password,
       });
-      localStorage.setItem('username', username);
-      localStorage.setItem('password', password);
     } else {
+      localStorage.removeItem('username');
+      localStorage.removeItem('password');
       setFormData({
-        ...formData,
         _username: '',
         _password: '',
       });
-      localStorage.removeItem('username');
-      localStorage.removeItem('password');
     }
   };
 
@@ -120,6 +124,9 @@ function Login() {
       <header className="App_header">
         <div className="hore">
           <p className="top_text">Web reader mobile 1.4.2</p>
+        </div>
+        <div>
+          <p className='url'>{serverUrl}</p>
         </div>
         <div className="content">
           <form onSubmit={handleSubmit}>

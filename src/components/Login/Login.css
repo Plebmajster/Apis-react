@@ -130,6 +130,7 @@ button.disabled {
   background-color: rgb(103, 215, 215);
   border-radius: 15px;
   padding: 7px;
+  cursor: pointer ;
 }
 .settings_modal {
   position: fixed;
