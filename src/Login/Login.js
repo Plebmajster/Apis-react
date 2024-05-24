@@ -3,7 +3,7 @@ import './Login.css';
 import QRREACT from 'react-qr-scanner';
 import { API_CONNECT } from '../constants/constants';
 
-function Login(){
+function Login() {
   const [username, setUsername] = useState(localStorage.getItem('username') || '');
   const [password, setPassword] = useState(localStorage.getItem('password') || '');
   const [showPassword, setShowPassword] = useState(false);
@@ -11,11 +11,13 @@ function Login(){
   const [serverUrl, setServerUrl] = useState(localStorage.getItem('serverUrl') || '');
   const [isScanning, setIsScanning] = useState(false);
   const [autoLogin, setAutoLogin] = useState(localStorage.getItem('autoLogin') === 'true');
+  const [wrongLogin, setWrongLogin] = useState(false);
 
   const [formData, setFormData] = useState({
     _username: '',
     _password: '',
-  })
+  });
+
   useEffect(() => {
     if (autoLogin) {
       setUsername(localStorage.getItem('username') || '');
@@ -27,42 +29,42 @@ function Login(){
     setUsername(event.target.value);
     setFormData({
       ...formData,
-      _username: event.target.value
+      _username: event.target.value,
     });
   };
-  
+
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
     setFormData({
       ...formData,
-      _password: event.target.value
+      _password: event.target.value,
     });
   };
-  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch (`${API_CONNECT}/system/api/v1/auth`, {
+      const response = await fetch(`${API_CONNECT}/system/api/v1/auth`, {
         method: 'POST',
         headers: {
-          'Content-type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: new URLSearchParams(formData).toString()
+        body: new URLSearchParams(formData).toString(),
       });
-  
-      if(!response.ok){
-        console.log('Authentication failed:', response.statusText)
+
+      if (!response.ok) {
+        setWrongLogin(true); // Set wrongLogin to true on authentication failure
+        console.log('Authentication failed:', response.statusText);
+      } else {
+        setWrongLogin(false); // Reset wrongLogin on successful authentication
+        console.log('Authentication successful');
+        window.location.href = '/Dashboard'; // Only redirect on success
       }
-  
-      console.log('Authentication successful')
-      window.location.href = '/Dashboard'
     } catch (error) {
-        console.log('Error during authentication:', error)
-      }
-    
+      setWrongLogin(true); // Set wrongLogin to true on error
+      console.log('Error during authentication:', error);
+    }
   };
-  
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -96,7 +98,7 @@ function Login(){
       setFormData({
         ...formData,
         _username: username,
-        _password: password
+        _password: password,
       });
       localStorage.setItem('username', username);
       localStorage.setItem('password', password);
@@ -104,42 +106,42 @@ function Login(){
       setFormData({
         ...formData,
         _username: '',
-        _password: ''
+        _password: '',
       });
       localStorage.removeItem('username');
       localStorage.removeItem('password');
     }
   };
-  console.log("Username:", formData._username);
-console.log("Password:", formData._password);
 
-  const isFormValid =  formData._username && formData._password;
+  const isFormValid = formData._username && formData._password;
 
   return (
     <div className="App">
       <header className="App_header">
-        <div className='hore'><p className='top_text'>Web reader mobile 1.4.2</p></div>
+        <div className="hore">
+          <p className="top_text">Web reader mobile 1.4.2</p>
+        </div>
         <div className="content">
           <form onSubmit={handleSubmit}>
-            <div className='forma'>
+            <div className="forma">
               <div className="input_container">
-                <img src='obr/user.png' alt='User Icon' className='input_icon' />
+                <img src="obr/user.png" alt="User Icon" className="input_icon" />
                 <input
-                  className='input'
+                  className="input"
                   type="text"
                   value={username}
                   onChange={handleUsernameChange}
-                  placeholder='Používateľské meno'
+                  placeholder="Používateľské meno"
                 />
               </div>
               <div className="input_container">
-                <img src='obr/padlock.png' alt='Password Icon' className='input_icon' />
+                <img src="obr/padlock.png" alt="Password Icon" className="input_icon" />
                 <input
-                  className='input input_heslo'
-                  type={showPassword ? "text" : "password"}
+                  className="input input_heslo"
+                  type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={handlePasswordChange}
-                  placeholder='Heslo'
+                  placeholder="Heslo"
                 />
                 <img
                   src={showPassword ? 'obr/eye.png' : 'obr/hidden.png'}
@@ -148,10 +150,10 @@ console.log("Password:", formData._password);
                   onClick={toggleShowPassword}
                 />
               </div>
-              <label className='automaticky'>
+              <label className="automaticky">
                 Prihlásiť Automaticky
                 <input
-                  type='checkbox'
+                  type="checkbox"
                   checked={autoLogin}
                   onChange={handleAutoLoginChange}
                 />
@@ -159,14 +161,20 @@ console.log("Password:", formData._password);
               <button
                 type="submit"
                 disabled={!isFormValid}
-                className={`submit_button ${!isFormValid ? 'disabled' : ''}`}>
+                className={`submit_button ${!isFormValid ? 'disabled' : ''}`}
+              >
                 Prihlásiť
               </button>
+              {wrongLogin && (
+                <div className="error_message">
+                  Nesprávne meno alebo heslo.
+                </div>
+              )}
             </div>
           </form>
         </div>
-        <div className='setting' onClick={handleSettingsClick}>
-          <img className='cog' src="obr/cog.png" alt="Settings" />
+        <div className="setting" onClick={handleSettingsClick}>
+          <img className="cog" src="obr/cog.png" alt="Settings" />
         </div>
 
         {isSettingsOpen && (
@@ -174,9 +182,9 @@ console.log("Password:", formData._password);
             <div className="settings_content">
               <h2>Nastavenia</h2>
               <input
-                className='cog_server'
+                className="cog_server"
                 type="text"
-                placeholder='Zadaj URL'
+                placeholder="Zadaj URL"
                 value={serverUrl}
                 onChange={(event) => setServerUrl(event.target.value)}
               />
