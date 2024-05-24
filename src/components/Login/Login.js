@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Login.css';
 import QRREACT from 'react-qr-scanner';
-import { API_CONNECT } from '../../../constants/constants';
+import { API_CONNECT } from '../../constants/constants';
 
 function Login() {
   const [username, setUsername] = useState(localStorage.getItem('username') || '');
