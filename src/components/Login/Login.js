@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Login.css';
+import './Login.scss';
 import QRREACT from 'react-qr-scanner';
 import { API_CONNECT } from '../../constants/constants';
 
