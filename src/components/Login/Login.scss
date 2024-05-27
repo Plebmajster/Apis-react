@@ -64,6 +64,7 @@ body {
   justify-content: center;
   align-items: center;
   color: white;
+  font-weight: bold;
   background-color: $backgroud_blue;
   border-radius: 20px;
   border: 0px;
@@ -126,11 +127,11 @@ button.disabled {
   bottom: 20px;
 }
 .cog {
-  width: 40px;
+  width: 35px;
   height: auto;
   background-color: $backgroud_blue;
   border-radius: 15px;
-  padding: 7px;
+  padding: 10px;
   cursor: pointer ;
 }
 .settings_modal {
@@ -177,6 +178,8 @@ button.disabled {
   display: flex;
   align-content: center;
   max-width: 100%;
+  font-weight: bold;
+  color: rgb(166, 16, 16);
 }
 form{
   max-width: 100%;

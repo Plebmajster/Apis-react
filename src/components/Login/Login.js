@@ -5,7 +5,7 @@ import { API_CONNECT } from '../../constants/constants';
 
 function Login() {
   const [username, setUsername] = useState(localStorage.getItem('username') || '');
-  const [password, setPassword] = useState(localStorage.getItem('password') || '');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [serverUrl, setServerUrl] = useState(localStorage.getItem('serverUrl') || '');
@@ -15,16 +15,15 @@ function Login() {
 
   const [formData, setFormData] = useState({
     _username: localStorage.getItem('username') || '',
-    _password: localStorage.getItem('password') || '',
+    _password: '',
   });
 
   useEffect(() => {
     if (autoLogin) {
       setUsername(localStorage.getItem('username') || '');
-      setPassword(localStorage.getItem('password') || '');
       setFormData({
         _username: localStorage.getItem('username') || '',
-        _password: localStorage.getItem('password') || '',
+        _password: '',
       });
     }
   }, [autoLogin]);
@@ -57,18 +56,18 @@ function Login() {
       });
 
       if (!response.ok) {
-        setWrongLogin(true); // Set wrongLogin to true on authentication failure
+        setWrongLogin(true); 
         console.log('Authentication failed:', response.statusText);
       } else {
-        setWrongLogin(false); // Reset wrongLogin on successful authentication
+        setWrongLogin(false); 
         console.log('Authentication successful');
-        window.location.href = serverUrl; // Only redirect on success
+        window.location.href = serverUrl; 
       }
     } catch (error) {
-      setWrongLogin(true); // Set wrongLogin to true on error
+      setWrongLogin(true); 
       console.log('Error during authentication:', error);
     }
-  };  
+  };
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -79,13 +78,12 @@ function Login() {
   };
 
   const handleScan = (data) => {
-  if (data) {
-    console.log('Scanned data:', data);
-    setServerUrl(data.text); // Set the scanned data to serverUrl
-    setIsScanning(false); // Stop scanning after successful scan
-  }
-};
-
+    if (data) {
+      console.log('Scanned data:', data);
+      setServerUrl(data.text);  
+      setIsScanning(false);
+    }
+  };
 
   const handleSettingsClick = () => {
     setIsSettingsOpen(true);
@@ -102,14 +100,12 @@ function Login() {
     localStorage.setItem('autoLogin', isChecked);
     if (isChecked) {
       localStorage.setItem('username', username);
-      localStorage.setItem('password', password);
       setFormData({
         _username: username,
         _password: password,
       });
     } else {
       localStorage.removeItem('username');
-      localStorage.removeItem('password');
       setFormData({
         _username: '',
         _password: '',
@@ -126,7 +122,7 @@ function Login() {
           <p className="top_text">Web reader mobile 1.4.2</p>
         </div>
         <div>
-          <p className='url'>{serverUrl}</p>
+          <p className="url">{serverUrl}</p>
         </div>
         <div className="content">
           <form onSubmit={handleSubmit}>
@@ -181,7 +177,7 @@ function Login() {
           </form>
         </div>
         <div className="setting" onClick={handleSettingsClick}>
-          <img className="cog" src="obr/cog.png" alt="Settings" />
+          <img className="cog" src="obr/gear.png" alt="Settings" />
         </div>
 
         {isSettingsOpen && (
