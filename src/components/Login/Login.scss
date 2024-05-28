@@ -162,17 +162,17 @@ button.disabled {
 }
 
 .settings_buttons button{
-  padding: 10px;
-  cursor: pointer;
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 10px;
-  border: 0px;
+  border-color: $backgroud_blue;
   background-color: $backgroud_blue;
+  cursor: pointer;
 }
-.cog_setting{
+.cog_settings{
   padding: 10px;
   border-radius: 5px;
+  border-color: $backgroud_blue;
 }
 .error_message{
   display: flex;
