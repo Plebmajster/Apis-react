@@ -98,7 +98,6 @@ const Login = () => {
     localStorage.setItem('serverUrl', serverUrl);
     setIsSettingsOpen(false);
   };
-
   const handleAutoLoginChange = (event: ChangeEvent<HTMLInputElement>) => {
     const isChecked = event.target.checked;
     setAutoLogin(isChecked);
@@ -111,13 +110,9 @@ const Login = () => {
       });
     } else {
       localStorage.removeItem('username');
-      setUsername('');
-      setFormData({
-        _username: '',
-        _password: '',
-      });
     }
   };
+  
   
 
   const isFormValid = formData._username && formData._password;
