@@ -216,7 +216,7 @@ const Login = () => {
                   delay={300}
                   onError={handleError}
                   onScan={handleScan}
-                  style={{ width: '100%', borderRadius: '15px' }}
+                  style={{ width: '90%', borderRadius: '10px'}}
                   constraints={{ video: { facingMode: 'environment' } }}
                 />
               )}
