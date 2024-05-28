@@ -65,6 +65,10 @@ const Login = () => {
         console.log('Authentication successful');
         window.location.href = serverUrl;
       }
+      // Save the username in localStorage after successful authentication
+      if (autoLogin) {
+        localStorage.setItem('username', username);
+      }
     } catch (error) {
       setWrongLogin(true);
       console.log('Error during authentication:', error);
@@ -201,7 +205,7 @@ const Login = () => {
               <div className="settings_buttons">
                 <button onClick={handleSaveUrl}>Uložiť</button>
                 <button onClick={() => setIsSettingsOpen(false)}>Zavrieť</button>
-                {navigator.mediaDevices && navigator.mediaDevices.getUserMedia ? (
+                {navigator.mediaDevices && typeof navigator.mediaDevices.getUserMedia === 'function' ? (
                   <button onClick={() => setIsScanning(!isScanning)}>QR kód</button>
                 ) : (
                   <p>Skenovanie QR kódu nie je povolené!</p>
