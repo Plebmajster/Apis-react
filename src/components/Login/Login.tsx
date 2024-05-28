@@ -1,34 +1,36 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import './Login.scss';
 import QRREACT from 'react-qr-scanner';
-import { API_CONNECT } from '../../constants/constants';
+import { API_CONNECT } from '../../constants/constants.ts';
 
-function Login() {
-  const [username, setUsername] = useState(localStorage.getItem('username') || '');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const [serverUrl, setServerUrl] = useState(localStorage.getItem('serverUrl') || '');
-  const [isScanning, setIsScanning] = useState(false);
-  const [autoLogin, setAutoLogin] = useState(localStorage.getItem('autoLogin') === 'true');
-  const [wrongLogin, setWrongLogin] = useState(false);
+const Login: React.FC = () => {
+  const [username, setUsername] = useState<string>(localStorage.getItem('username') || '');
+  const [password, setPassword] = useState<string>('');
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
+  const [serverUrl, setServerUrl] = useState<string>(localStorage.getItem('serverUrl') || '');
+  const [isScanning, setIsScanning] = useState<boolean>(false);
+  const [autoLogin, setAutoLogin] = useState<boolean>(localStorage.getItem('autoLogin') === 'true');
+  const [wrongLogin, setWrongLogin] = useState<boolean>(false);
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{ _username: string; _password: string }>({
     _username: localStorage.getItem('username') || '',
     _password: '',
   });
 
   useEffect(() => {
-    if (autoLogin) {
-      setUsername(localStorage.getItem('username') || '');
-      setFormData({
-        _username: localStorage.getItem('username') || '',
-        _password: '',
-      });
-    }
-  }, [autoLogin]);
+  if (autoLogin) {
+    const storedUsername = localStorage.getItem('username') || '';
+    setUsername(storedUsername);
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      _username: storedUsername,
+    }));
+  }
+}, [autoLogin]);
 
-  const handleUsernameChange = (event) => {
+
+  const handleUsernameChange = (event: ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
     setFormData({
       ...formData,
@@ -36,7 +38,7 @@ function Login() {
     });
   };
 
-  const handlePasswordChange = (event) => {
+  const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
     setFormData({
       ...formData,
@@ -44,7 +46,7 @@ function Login() {
     });
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
       const response = await fetch(`${API_CONNECT}/system/api/v1/auth`, {
@@ -56,15 +58,15 @@ function Login() {
       });
 
       if (!response.ok) {
-        setWrongLogin(true); 
+        setWrongLogin(true);
         console.log('Authentication failed:', response.statusText);
       } else {
-        setWrongLogin(false); 
+        setWrongLogin(false);
         console.log('Authentication successful');
-        window.location.href = serverUrl; 
+        window.location.href = serverUrl;
       }
     } catch (error) {
-      setWrongLogin(true); 
+      setWrongLogin(true);
       console.log('Error during authentication:', error);
     }
   };
@@ -73,14 +75,14 @@ function Login() {
     setShowPassword(!showPassword);
   };
 
-  const handleError = (error) => {
+  const handleError = (error: any) => {
     console.log(error);
   };
 
-  const handleScan = (data) => {
+  const handleScan = (data: any) => {
     if (data) {
       console.log('Scanned data:', data);
-      setServerUrl(data.text);  
+      setServerUrl(data.text);
       setIsScanning(false);
     }
   };
@@ -94,10 +96,10 @@ function Login() {
     setIsSettingsOpen(false);
   };
 
-  const handleAutoLoginChange = (event) => {
+  const handleAutoLoginChange = (event: ChangeEvent<HTMLInputElement>) => {
     const isChecked = event.target.checked;
     setAutoLogin(isChecked);
-    localStorage.setItem('autoLogin', isChecked);
+    localStorage.setItem('autoLogin', isChecked.toString());
     if (isChecked) {
       localStorage.setItem('username', username);
       setFormData({
@@ -106,12 +108,14 @@ function Login() {
       });
     } else {
       localStorage.removeItem('username');
+      setUsername('');
       setFormData({
         _username: '',
         _password: '',
       });
     }
   };
+  
 
   const isFormValid = formData._username && formData._password;
 
@@ -215,6 +219,6 @@ function Login() {
       </header>
     </div>
   );
-}
+};
 
 export default Login;
