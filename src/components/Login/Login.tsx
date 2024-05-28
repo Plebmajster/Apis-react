@@ -3,7 +3,7 @@ import './Login.scss';
 import QRREACT from 'react-qr-scanner';
 import { API_CONNECT } from '../../constants/constants.ts';
 
-const Login: React.FC = () => {
+const Login = () => {
   const [username, setUsername] = useState<string>(localStorage.getItem('username') || '');
   const [password, setPassword] = useState<string>('');
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -134,6 +134,7 @@ const Login: React.FC = () => {
               <div className="input_container">
                 <img src="obr/user.png" alt="User Icon" className="input_icon" />
                 <input
+                  name='input'
                   className="input"
                   type="text"
                   value={username}
@@ -144,6 +145,7 @@ const Login: React.FC = () => {
               <div className="input_container">
                 <img src="obr/padlock.png" alt="Password Icon" className="input_icon" />
                 <input
+                  name='input'
                   className="input input_heslo"
                   type={showPassword ? 'text' : 'password'}
                   value={password}
@@ -160,6 +162,7 @@ const Login: React.FC = () => {
               <label className="automaticky">
                 Prihlásiť Automaticky
                 <input
+                  name='input'
                   type="checkbox"
                   checked={autoLogin}
                   onChange={handleAutoLoginChange}
@@ -189,7 +192,7 @@ const Login: React.FC = () => {
             <div className="settings_content">
               <h2>Nastavenia</h2>
               <input
-                className="cog_server"
+                className="cog_settings"
                 type="text"
                 placeholder="Zadaj URL"
                 value={serverUrl}
