@@ -63,9 +63,8 @@ const Login = () => {
       } else {
         setWrongLogin(false);
         console.log('Authentication successful');
-        window.location.href = serverUrl;
+        window.location.href = '/Dashboard';
       }
-      // Save the username in localStorage after successful authentication
       if (autoLogin) {
         localStorage.setItem('username', username);
       }
@@ -196,6 +195,7 @@ const Login = () => {
             <div className="settings_content">
               <h2>Nastavenia</h2>
               <input
+                name='settings_url'
                 className="cog_settings"
                 type="text"
                 placeholder="Zadaj URL"

@@ -136,8 +136,6 @@ button.disabled {
 }
 .settings_modal {
   position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
@@ -150,14 +148,15 @@ button.disabled {
   background: white;
   padding: 20px;
   border-radius: 5px;
-  width: 80%;
-  max-width: 250px;
+  width: 350px;
+  max-width: 70vw;
   text-align: center;
 }
 
-.settings_buttons {
+div.settings_buttons {
   display: flex;
   justify-content: space-around;
+  flex-direction: column;
   margin-top: 20px;
 }
 
@@ -168,11 +167,13 @@ button.disabled {
   border-color: $backgroud_blue;
   background-color: $backgroud_blue;
   cursor: pointer;
+  font-weight: bold;
 }
 .cog_settings{
   padding: 10px;
   border-radius: 5px;
   border-color: $backgroud_blue;
+  width: 70%;
 }
 .error_message{
   display: flex;
