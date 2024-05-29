@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+@import 'src/constants/variables.scss' ;
+
+.settingsBox {
+  position: fixed;
+  right: 20px;
+  bottom: 10vh;
+  width: 50px;
+  height: 50px;
+  background-color: $main-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20%;
+  cursor: pointer;
+}
+
+.settingsBox img {
+  width: 24px;
+  height: 24px;
+  filter: invert(100%);
+}
+.settings-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.settings-content {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 80%;
+  max-width: 400px;
+  text-align: center;
+}
+.settings-content input{
+  margin: 20px;
+  padding: 5px;
+  width: 80%;
+}
+.settings-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+
+.settings-buttons button {
+  padding: 10px;
+  margin: 5px;
+  align-self: center;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  background-color: $main-color;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}

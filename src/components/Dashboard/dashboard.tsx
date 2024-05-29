@@ -1,11 +1,17 @@
-import React from 'react';
-import './dashboard.scss';
+import React, { useEffect } from 'react';
 
-function Dashboard(){
-    return(
-            
-        <p>Hello Dashboard</p>
-    )
+const Dashboard = () => {
+  useEffect(() => {
+    const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+    if (!isAuthenticated) {
+      window.location.href = '/';
+      
     }
+  }, []);
 
-export default Dashboard
+  return (
+    <div>Insane Dashboard</div>
+  );
+};
+
+export default Dashboard;
