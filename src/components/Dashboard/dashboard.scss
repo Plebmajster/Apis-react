@@ -1,16 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
 @import 'src/constants/variables.scss' ;
 
-.section_dash{
-    margin: 0px;
-    width: 100vw;
+*{
     height: auto;
+    max-width: 100vw;
+}
+html{
     background-color: rgb(241, 239, 239);
 }
-.dashboard_container{
+.section_dash {
+    margin: 0px;
+    margin-bottom: 50px;
+    width: 98.5vw;
+    max-width: 100vw;
+    height: auto;
+    background-color: rgb(241, 239, 239);
     display: flex;
-    height: 8vh;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.dashboard_container {
+    position: fixed;
+    z-index: 999; /* Ensure it's below the overlay */
+    top: 0;
+    display: flex;
+    height: auto;
     width: 100vw;
+    max-width: 100vw;
+    padding: 10px 0px 10px 0px;
     box-shadow: 0px 0px 1px 0px;
     background-color: white;
     flex-direction: row;
@@ -34,6 +54,7 @@
     background-color: $transitionBlue-color;
 }
 .section_vnutro{
+    margin-top: 60px;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -49,9 +70,8 @@
     align-items: center;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 20px;
     padding: 15px 15px 20px 15px;
-    width: 90vw;
+    width: 80vw;
     max-width: 95vw;
     box-shadow: 0px 0px 1px 0px;
     background-color: white;
@@ -87,7 +107,7 @@
     flex-wrap: wrap;
     justify-content: center;
     padding: 15px 15px 10px 15px;
-    width: 90vw;
+    width: 80vw;
     max-width: 95vw;
     box-shadow: 0px 0px 1px 0px;
     background-color: white;
@@ -137,7 +157,7 @@
     flex-wrap: wrap;
     justify-content: center;
     padding: 15px 15px 10px 15px;
-    width: 90vw;
+    width: 80vw;
     max-width: 95vw;
     box-shadow: 0px 0px 1px 0px;
     background-color: white;
@@ -168,6 +188,8 @@
     width: 98%;
     min-height: 50px;
     max-height: 50vh;
+    padding: 10px;
+    border-radius: 5px;
 }
 .praca_section{
     display: flex;
@@ -177,7 +199,7 @@
     flex-wrap: wrap;
     justify-content: center;
     padding: 15px 15px 10px 15px;
-    width: 90vw;
+    width: 80vw;
     max-width: 95vw;
     border-radius: 5px;
     box-shadow: 0px 0px 1px 0px;
@@ -233,4 +255,136 @@
     align-content: center;
     justify-content: center;
     align-items: center;
+}
+.tabs_section{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 80vw;
+    max-width: 95vw;
+    margin-top: 30px;
+    gap: 30px;
+}
+.tabs{
+    min-width: 260px;
+    width: 31.2%;
+    max-width: 80%;
+    height: auto;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 1px 0px;
+    align-items: center;
+}
+.tabs_sluzobne_img{
+    height: 50px;
+    width: auto;
+    padding: 8px 8px 0px 8px;
+}
+.tabs_zaciatok_button{
+    color: white;
+    width: 50%;
+    background-color: rgb(76, 163, 76);
+    padding: 13px;
+    border: 0px;
+    border-radius: 5px;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+    cursor: pointer;
+}
+.tabs_zaciatok_button:hover{
+    background-color: rgb(19, 163, 19);
+}
+.tabs_koniec_button{
+    color: white;
+    width: 50%;
+    background-color: rgb(188, 62, 62);
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 13px;
+    border: 0px;
+    cursor: pointer;
+}
+.tabs_koniec_button:hover{
+    background-color: rgb(190, 27, 27);
+}
+.tabs_medzera{
+    padding-left: 10px;
+    width: 100%;
+}
+.tabs_text{
+    font-size: 0.8em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.user_img{
+    position: absolute;
+    top: 6px;
+    height: 40px;
+    width: auto;
+    background-color: #333;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    color: white;
+    font-size: 16px;
+    padding: 10px 10px 10px 5px;
+}
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    max-width: 50vw;
+    height: 100vh;
+    background-color: white;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1001;
+    padding-top: 40px;
+}
+
+.sidebar.open {
+    transform: translateX(0);
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+.overlay.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.user_img {
+    cursor: pointer;
+}
+
+.sidebar_toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.dashboard_container {
+    justify-content: space-between;
 }
