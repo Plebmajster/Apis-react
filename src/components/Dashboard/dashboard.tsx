@@ -39,10 +39,41 @@ const Dashboard = () => {
         </button>
       </div>
       <div className='section_vnutro'>
-        <div className='time_date'>
+
+        <div className='time_date_section'>
           <p className='time'>{currentTime}</p>
-          <p className='date'>{currentDate} | <img className='pin' src='/obr/pin.png' alt='pin'></img></p>
+          <p className='date'>{currentDate} | <img className='pin_img' src='/obr/pin.png' alt='pin'></img></p>
         </div>
+
+        <div className='praca_odchod_section'>
+          <img className='history_img' src='/obr/history.png' alt='history'></img>
+          <p className='praca_odchod_text'>Praca / Odchod</p>
+            <div className='cas_datum_prichodu'>
+              <p className='cas_prichodu'>16:33:10 /</p>
+              <p className='datum_prichodu'>27.05.2024</p>
+            </div>
+            <button className='button_poznamka'>
+              Pridať Poznámku
+            </button>
+        </div>
+
+        <div className='poznamka_section'>
+          <div className='poznamka_dokopy'>
+          <img className='poznamka_img' src='/obr/message.png' alt='poznamka_img'></img>
+          <p className='poznamka_text'>Poznámka</p>
+          </div>
+          <textarea className='input_poznamka'></textarea>
+        </div>
+
+        <div className='praca_section'>
+          <p className='praca_text'>Práca</p>
+          <div className='praca_buttons'>
+            <button className='prichod_button'><p className='inside_button_text'>Príchod</p></button>
+            <button className='odchod_button'><p className='inside_button_text'>Odchod</p></button>
+          </div>
+
+        </div>
+
       </div>
     </div>
   );
