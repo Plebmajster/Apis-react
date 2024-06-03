@@ -36,11 +36,50 @@ const Dashboard = () => {
   };
 
   return (
+    
     <div className='dashboard'>
+
       <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
-        <img className='user_img' src='/obr/user.png' alt='user' onClick={toggleSidebar} />
-      </div>
-      <div className={`overlay ${isSidebarOpen ? 'visible' : ''}`} onClick={toggleSidebar}></div>
+
+      <img className='user_img' src='/obr/user.png' alt='user' onClick={toggleSidebar} />
+
+          <div className='sidebar_top'>
+            <button className='sidebar_top_vlavo'><img className='checkbox_button' src='/obr/checkbox.png' alt="" /></button>
+            <button className='sidebar_top_vstrede'><img className='checkbox_button' src='/obr/checkbox.png' alt="" />
+            <img className='checkbox_button' src='/obr/double-horizontal-arrow.png' alt="double-horizontal-arrow" /><img className='checkbox_button' src='/obr/unchecked.png' alt="" /></button>
+            <button className='sidebar_top_vpravo'><img className='checkbox_button' src='/obr/unchecked.png' alt="" /></button>
+          </div>
+
+          <div className='users_tab'><img className='users_star' src='/obr/star.png' alt="" /><div className='user'><p className='users_name'>Meno</p><p className='users_num'>[49-1]</p></div></div>
+          <div className='users_tab'><div className='user'><p className='users_name'>Meno</p><p className='users_num'>[49-1]</p></div></div>
+          <div className='users_tab'><div className='user'><p className='users_name'>Meno</p><p className='users_num'>[49-1]</p></div></div>
+          <div className='users_tab'><div className='user'><p className='users_name'>Meno</p><p className='users_num'>[49-1]</p></div></div>
+          <div className='users_tab'><div className='user'><p className='users_name'>Meno</p><p className='users_num'>[49-1]</p></div></div>
+          <div className='users_tab'><div className='user'><p className='users_name'>Meno</p><p className='users_num'>[49-1]</p></div></div>
+          <div className='users_tab'><div className='user'><p className='users_name'>Meno</p><p className='users_num'>[49-1]</p></div></div>
+          <div className='users_tab'><div className='user'><p className='users_name'>Meno</p><p className='users_num'>[49-1]</p></div></div>
+          <div className='users_tab'><div className='user'><p className='users_name'>Meno</p><p className='users_num'>[49-1]</p></div></div>
+          <div className='users_tab'><div className='user'><p className='users_name'>Meno</p><p className='users_num'>[49-1]</p></div></div>
+          <div className='users_tab'><div className='user'><p className='users_name'>Meno</p><p className='users_num'>[49-1]</p></div></div>
+          <div className='users_tab'><div className='user'><p className='users_name'>Meno</p><p className='users_num'>[49-1]</p></div></div>
+          <div className='users_tab'><div className='user'><p className='users_name'>Meno</p><p className='users_num'>[49-1]</p></div></div>
+          <div className='users_tab'><div className='user'><p className='users_name'>Meno</p><p className='users_num'>[49-1]</p></div></div>
+          <div className='users_tab'><div className='user'><p className='users_name'>Meno</p><p className='users_num'>[49-1]</p></div></div>
+          <div className='users_tab'><div className='user'><p className='users_name'>Meno</p><p className='users_num'>[49-1]</p></div></div>
+          <div className='users_tab'><div className='user'><p className='users_name'>Meno</p><p className='users_num'>[49-1]</p></div></div>
+          <div className='users_tab'><div className='user'><p className='users_name'>Meno</p><p className='users_num'>[49-1]</p></div></div>
+          <div className='users_tab'><div className='user'><p className='users_name'>Meno</p><p className='users_num'>[49-1]</p></div></div>
+          <div className='users_tab'><div className='user'><p className='users_name'>Meno</p><p className='users_num'>[49-1]</p></div></div>
+          <div className='users_tab'><div className='user'><p className='users_name'>Meno</p><p className='users_num'>[49-1]</p></div></div>
+          <div className='users_tab'><div className='user'><p className='users_name'>Meno</p><p className='users_num'>[49-1]</p></div></div>
+          <div className='users_tab'><div className='user'><p className='users_name'>Meno</p><p className='users_num'>[49-1]</p></div></div>
+          <div className='users_tab'><div className='user'><p className='users_name'>Meno</p><p className='users_num'>[49-1]</p></div></div>
+          <div className='users_tab'><div className='user'><p className='users_name'>Meno</p><p className='users_num'>[49-1]</p></div></div>
+          <div className='users_tab'><div className='user'><p className='users_name'>Meno</p><p className='users_num'>[49-1]</p></div></div>
+          <div className='users_tab'><div className='user'><p className='users_name'>Meno</p><p className='users_num'>[49-1]</p></div></div>
+          <div className='users_tab'><div className='user'><p className='users_name'>Meno</p><p className='users_num'>[49-1]</p></div></div>
+        </div>
+      <div className={`overlay ${isSidebarOpen ? 'visible' : 'hidden'}`} onClick={toggleSidebar}></div>
       <div className='dashboard_container'>
         <button className='sidebar_toggle' onClick={toggleSidebar}>
           <img className='user_img' src='/obr/user.png' alt='user'/>
@@ -70,7 +109,7 @@ const Dashboard = () => {
             <img className='poznamka_img' src='/obr/message.png' alt='poznamka_img' />
             <p className='poznamka_text'>Poznámka</p>
           </div>
-          <textarea className='input_poznamka'></textarea>
+          <textarea name='text_area' className='input_poznamka'></textarea>
         </div>
         <div className='praca_section'>
           <p className='praca_text'>Práca</p>

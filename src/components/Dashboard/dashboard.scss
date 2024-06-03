@@ -350,7 +350,7 @@ html{
     transform: translateX(-100%);
     transition: transform 0.3s ease-in-out;
     z-index: 1001;
-    padding-top: 40px;
+    overflow-y: auto;
 }
 
 .sidebar.open {
@@ -375,10 +375,6 @@ html{
     visibility: visible;
 }
 
-.user_img {
-    cursor: pointer;
-}
-
 .sidebar_toggle {
     background: none;
     border: none;
@@ -387,4 +383,94 @@ html{
 
 .dashboard_container {
     justify-content: space-between;
+}
+.sidebar_top{
+    height: auto;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    padding: 10px;
+}
+.sidebar_top_vlavo{
+    height: 30px;
+    width: 27%;
+    background-color: $main-color;
+    border: 0px;
+    box-shadow: 0px 0px 0.7px 0px;
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+    cursor: pointer;
+}
+.sidebar_top_vlavo:hover{
+    background-color: $transitionBlue-color;
+}
+.sidebar_top_vstrede{
+    height: 30px;
+    width: 27%;
+    background-color: $main-color;
+    border: 0px;
+    box-shadow: 0px 0px 0.7px 0px;
+    cursor: pointer;
+}
+.sidebar_top_vstrede:hover{
+    background-color: $transitionBlue-color;
+}
+.sidebar_top_vpravo{
+    height: 30px;
+    width: 27%;
+    background-color: $main-color;
+    border: 0px;
+    box-shadow: 0px 0px 0.7px 0px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    cursor: pointer;
+}
+.sidebar_top_vpravo:hover{
+    background-color: $transitionBlue-color;
+}
+.users_star{
+    height: 12px;
+    width: auto;
+}
+.users_tab{
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    width: 100%;
+    box-shadow: 0px 0px 0.7px 0px;
+    padding: 5px;
+    gap: 10px;
+}
+.user{
+    gap: 10px;
+}
+.users_name{
+    font-weight: bold;
+    font-size: 0.8em;
+}
+.users_num{
+    font-size: 0.8em;
+}
+.user_img1{
+    cursor: pointer;
+    display: block;
+    position: absolute; /* or absolute based on your layout */
+    z-index: 1003; /* Higher than the sidebar and overlay */
+    top: 6px;
+    left: 250px;
+    height: 40px;
+    width: auto;
+    background-color: #ffffff;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    color: white;
+    font-size: 16px;
+    padding: 10px 10px 10px 5px;
+}
+.checkbox_button{
+    height: 15px;
+    width: auto;
 }
